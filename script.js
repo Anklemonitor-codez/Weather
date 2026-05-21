@@ -57,7 +57,7 @@ async function getWeather(lat, lon, cityName) {
         console.log(icon, weatherDesc)
 
         document.getElementById("location").textContent =
-            `${cityName}`
+            `${cityName}, ${townName}`
 
         document.getElementById("current-temp").textContent =
             `${data.current.temperature_2m}°C`;
