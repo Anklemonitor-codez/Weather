@@ -151,7 +151,6 @@ async function searchCity() {
 
     setCookie("city", cityName, 2);
 
-    chart.destroy();
     getWeather(lat, lon, cityName, townName);
 }
 
