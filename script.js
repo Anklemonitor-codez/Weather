@@ -33,6 +33,12 @@ const weatherCodes = {
 async function getWeather(lat, lon, cityName, townName) {
     try {   
         
+        document.getElementById("location").textContent =
+            `Searching...`
+
+        document.getElementById("weather-description").textContent =
+            `Searching...`
+
         const response = await fetch(
         `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&hourly=temperature_2m,precipitation_probability,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=auto`
         );
@@ -139,5 +145,64 @@ async function searchCity() {
     const cityName = place.name
     const townName = place.admin2
 
+    setCookie("city", cityName, 2)
+
     getWeather(lat, lon, cityName, townName);
+}
+
+async function searchCityCookie(city) {
+    const response = await fetch(
+    `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`
+    );
+
+    const data = await response.json();
+
+    console.log(data);
+
+    const place = data.results[0];
+
+    const lat = place.latitude
+    const lon = place.longitude
+    const cityName = place.name
+    const townName = place.admin2
+
+    getWeather(lat, lon, cityName, townName);
+}
+
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function checkCookie(cookieVarName) {
+  let username = getCookie(cookieVarName);
+  if (username != "") {
+    return true
+  }
+}
+
+if (checkCookie("city")) {
+    let x = getCookie("city")
+
+    if (x != "") {
+        searchCityCookie(x)
+    }
 }
