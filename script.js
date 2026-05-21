@@ -30,6 +30,8 @@ const weatherCodes = {
     }
 };
 
+let chart = null
+
 async function getWeather(lat, lon, cityName, townName) {
     try {   
         
@@ -90,10 +92,12 @@ async function getWeather(lat, lon, cityName, townName) {
             `${maxRainChance}%`
 
         const ctx = document.getElementById("daily-forecast-graph");
+        
+        if (chart) {
+            chart.destroy()
+        }
 
-        const labels = 
-
-        new Chart(ctx, {
+        chart = new Chart(ctx, {
             type: "line",
             data: {
                 labels: data.hourly.time.slice(0, 24).map(t => {
@@ -140,13 +144,14 @@ async function searchCity() {
 
     const place = data.results[0];
 
-    const lat = place.latitude
-    const lon = place.longitude
-    const cityName = place.name
-    const townName = place.admin2
+    const lat = place.latitude;
+    const lon = place.longitude;
+    const cityName = place.name;
+    const townName = place.admin2;
 
-    setCookie("city", cityName, 2)
+    setCookie("city", cityName, 2);
 
+    chart.destroy();
     getWeather(lat, lon, cityName, townName);
 }
 
