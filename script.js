@@ -30,7 +30,7 @@ const weatherCodes = {
     }
 };
 
-async function getWeather(lat, lon, cityName) {
+async function getWeather(lat, lon, townName) {
     try {   
         
         const response = await fetch(
