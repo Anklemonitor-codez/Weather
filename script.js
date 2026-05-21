@@ -211,3 +211,10 @@ if (checkCookie("city")) {
         searchCityCookie(x)
     }
 }
+
+document.querySelector('#city').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        console.log("enter pressed")
+        searchCity()
+    }
+});
