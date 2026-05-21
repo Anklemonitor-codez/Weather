@@ -1,0 +1,134 @@
+body {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#main {
+    display: grid;
+    grid-template-columns: repeat(12, [col-start] 1fr);
+    gap: 20px;
+}
+
+header {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 3px;
+    color: white;
+}
+
+header h3 {
+    margin-top: 0px;
+    color: white;
+}
+
+.current-weather {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(185, 185, 252);
+    padding: 20px;
+    border-radius: 20px;
+    width: 300px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 10px;
+}
+
+#current-weather-details {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+#main {
+    order: 1px solid green;
+    background-color: beige;
+    padding: 10px;
+    grid-column: col-start / span 12;
+}
+
+.current-detail-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.current-detail-wrapper span {
+    text-align: center;
+}
+
+.current-detail-title {
+    font-size: 25px;
+}
+
+.current-detail {
+    font-size: 20px;
+}
+
+#current-weather-title {
+    font-size: 35px;
+    margin-top: 0px;
+}
+
+@media (max-width: 600px) {
+    #current-weather-title {
+        margin: 0px;
+    }
+}
+
+@media (min-width: 600px) {
+    #current-weather-details {
+        gap: 20px;
+        flex-direction: row;
+    }
+
+    .current-weather {
+        width: 600px;
+    }
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+}
+
+#sketch-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* THIS makes it a background */
+}
+
+canvas {
+    display: block;
+}
+
+#city {
+    margin-top: 13px;
+    width: 220px;
+    border-radius: 10px;
+    padding: 10px;
+    outline: none;
+}
+
+#city:focus {
+    border: blue solid 2px;
+}
+
+#search {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#search:hover {
+    cursor: pointer;
+    background-color: grey;
+}
