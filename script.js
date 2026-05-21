@@ -137,6 +137,7 @@ async function searchCity() {
     const lat = place.latitude
     const lon = place.longitude
     const cityName = place.name
+    const townName = place.admin2
 
-    getWeather(lat, lon, cityName);
+    getWeather(lat, lon, cityName, townName);
 }
