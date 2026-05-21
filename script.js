@@ -52,6 +52,12 @@ async function getWeather(lat, lon, cityName, townName) {
         const icon = weatherCodes[data.current.weather_code].icon
         const weatherDesc = weatherCodes[data.current.weather_code].text
 
+        var sunriseIsoDate = new Date(data.daily.sunrise[0]);
+        var sunsetIsoDate = new Date(data.daily.sunset[0]);
+        var options = { hour: 'numeric', minute: 'numeric', hour12: true };
+        var sunriseAmPmDate = sunriseIsoDate.toLocaleString('en-US', options);
+        var sunsetAmPmDate = sunsetIsoDate.toLocaleString('en-US', options);
+
         let maxRainChance = 0;
 
         for (let i = 0; i < 24; i++) {
@@ -71,7 +77,7 @@ async function getWeather(lat, lon, cityName, townName) {
             `${data.current.temperature_2m}°C`;
 
         document.getElementById("current-temp-feels-like").textContent =
-            `Feels like: ${data.current.apparent_temperature}°C`;
+            `${data.current.apparent_temperature}°C`;
 
         document.getElementById("weather-description").textContent =
             `${icon} ${weatherDesc}`;
@@ -90,6 +96,12 @@ async function getWeather(lat, lon, cityName, townName) {
 
         document.getElementById("daily-rain-chance").textContent =
             `${maxRainChance}%`
+
+        document.getElementById("sunrise").textContent =
+            `${sunriseAmPmDate}`
+
+        document.getElementById("sunset").textContent =
+            `${sunsetAmPmDate}`
 
         const ctx = document.getElementById("daily-forecast-graph");
         
@@ -151,6 +163,7 @@ async function searchCity() {
 
     setCookie("city", cityName, 2);
 
+    chart.destroy();
     getWeather(lat, lon, cityName, townName);
 }
 
