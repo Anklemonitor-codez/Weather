@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Site</title>
-    <link rel="stylesheet" href="styles.css?v=1">
+    <title>Weather</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="shader.js"></script>
@@ -12,11 +12,12 @@
 <body>
     <div id="sketch-container"></div>
     <header id="header">
+        <h1>Weather</h1>
         <input type="text" id="city" placeholder="Enter city">
         <button onclick="searchCity()" id="search">
             Search
         </button>
-        <h1 id="weather-description">Search for a city...</h1>
+        <h2 id="weather-description">Search for a city...</h2>
         <h3 id="location">Search for a city...</h3>
     </header>
     <main id="main-content">
@@ -25,16 +26,19 @@
             <div id="current-weather-details">
                 <div class="current-detail-wrapper" id="current-temperature-wrapper">
                     <span class="current-detail-title">Temperature</span>
-                    <span id="current-temp" class="current-detail">...</span>
-                    <span id="current-temp-feels-like" class="current-detail">...</span>
+                    <span id="current-temp" class="current-detail">Loading...</span>
+                </div>
+                <div class="current-detail-wrapper" id="current-temperature-wrapper">
+                    <span class="current-detail-title">Feels Like</span>
+                    <span id="current-temp-feels-like" class="current-detail">Loading...</span>
                 </div>
                 <div class="current-detail-wrapper" id="current-humidity-wrapper">
                     <span class="current-detail-title">Humidity</span>
-                    <span id="current-humidity" class="current-detail">...</span>
+                    <span id="current-humidity" class="current-detail">Loading...</span>
                 </div>
                 <div class="current-detail-wrapper" id="current-wind-speed-wrapper">
                     <span class="current-detail-title">Wind Speed</span>
-                    <span id="current-wind-speed" class="current-detail">...</span>
+                    <span id="current-wind-speed" class="current-detail">Loading...</span>
                 </div>
             </div>
         </div>
@@ -45,19 +49,30 @@
             <div id="current-weather-details">
                 <div class="current-detail-wrapper" id="daily-temp-wrapper">
                     <span class="current-detail-title">Temperature</span>
-                    <span id="daily-temp-min" class="current-detail">...</span>
-                    <span id="daily-temp-max" class="current-detail">...</span>
+                    <span id="daily-temp-min" class="current-detail">Loading...</span>
+                    <span id="daily-temp-max" class="current-detail">Loading...</span>
                 </div>
                 <div class="current-detail-wrapper" id="daily-rain-chance-wrapper">
                     <span class="current-detail-title">Chance of Rain</span>
-                    <span id="daily-rain-chance" class="current-detail">...</span>
+                    <span id="daily-rain-chance" class="current-detail">Loading...</span>
                 </div>
             </div>
             <canvas id="daily-forecast-graph" style="margin-top: 20px;"></canvas>
         </div>
 
-        <div id="daily-forecast">
-
+        <!--Sunrise and sunset-->
+        <div class="current-weather" id="sunrise/set">
+            <h2 id="current-weather-title">Sunrise/Sunset</h2>
+            <div id="current-weather-details">
+                <div class="current-detail-wrapper" id="sunrise-wrapper">
+                    <span class="current-detail-title">☀️Sunrise</span>
+                    <span id="sunrise" class="current-detail">Loading...</span>
+                </div>
+                <div class="current-detail-wrapper" id="sunset-wrapper">
+                    <span class="current-detail-title">🌙Sunset</span>
+                    <span id="sunset" class="current-detail">Loading...</span>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -209,6 +224,6 @@ void main() {
 }
 
     </script>
-    <script src="script.js?v=8"></script>
+    <script src="script.js?v=10"></script>
 </body>
 </html>
